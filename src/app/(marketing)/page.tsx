@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <>
       {/* Hero section  */}
-      <section className="min-h-dvh bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops)_60%)] dark:from-red-900 from-red-100 dark:via-yellow-950 via-yellow-100 to-bg-primary flex items-center justify-center text-center text-balance flex-col gap-8 px-4">
+      <section className="min-h-[calc(100vh-70px)] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops)_60%)] dark:from-red-900 from-red-100 dark:via-yellow-950 via-yellow-100 to-bg-primary flex items-center justify-center text-center text-balance flex-col gap-8 px-4">
         <h1 className="text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight m-4">
           Price smarter, Sell bigger!
         </h1>
