@@ -1,15 +1,22 @@
 // UI
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import BrandLogo from "./_components/brand-logo";
-import { ClerkIcon, NeonIcon } from "./_components/icons";
 import FooterGroup from "./_components/footer-group";
+import { ClerkIcon, NeonIcon } from "./_components/icons";
 import PricingCard from "./_components/pricing-card";
 
-// constants
+// constant
 import { subscriptionTiersInOrder } from "../../../data/subscriptionTiers";
 
 // Lib
-import { ClerkLoaded, ClerkLoading, SignUpButton } from "@clerk/nextjs";
+import { cn } from "@/lib/utils";
+import {
+  ClerkLoaded,
+  ClerkLoading,
+  SignedIn,
+  SignedOut,
+  SignUpButton,
+} from "@clerk/nextjs";
 import { ArrowRightCircle, Loader } from "lucide-react";
 import Link from "next/link";
 
@@ -21,7 +28,7 @@ export default function Home() {
         <h1 className="text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight m-4">
           Price smarter, Sell bigger!
         </h1>
-        <p className="texy-lg lg:text-3xl text-gray-600 dark:text-gray-300 max-w-screen-xl">
+        <p className="texy-lg lg:text-3xl text-muted-foreground dark:text-gray-300 max-w-screen-xl">
           Optimize your product pricing across countries to maximize sales.
           Capture 85% of the untapped market with location-based dynamic pricing
         </p>
@@ -32,12 +39,26 @@ export default function Home() {
           </Button>
         </ClerkLoading>
         <ClerkLoaded>
-          <SignUpButton>
-            <Button size="lg" className="text-lg ">
-              Get started for free
-              <ArrowRightCircle />
-            </Button>
-          </SignUpButton>
+          <SignedOut>
+            <SignUpButton>
+              <Button size="lg" className="text-lg ">
+                Get started for free
+                <ArrowRightCircle />
+              </Button>
+            </SignUpButton>
+          </SignedOut>
+
+          <SignedIn>
+            <Link
+              className={cn(buttonVariants({ size: "lg" }), "text-lg")}
+              href="/dashboard"
+            >
+              Dashboard
+            </Link>
+            <p className="text-muted-foreground">
+              You are already logged in 🎉, go to the dashboard
+            </p>
+          </SignedIn>
         </ClerkLoaded>
       </section>
 
