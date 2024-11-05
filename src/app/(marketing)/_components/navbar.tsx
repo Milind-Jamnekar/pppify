@@ -20,8 +20,7 @@ import {
   SignedOut,
   SignInButton,
 } from "@clerk/nextjs";
-import { ReloadIcon } from "@radix-ui/react-icons";
-import { MenuIcon } from "lucide-react";
+import { Loader, MenuIcon } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import BrandLogo from "./brand-logo";
@@ -55,7 +54,7 @@ function LoginOrLogoutButton() {
     <>
       <ClerkLoading>
         <Button disabled>
-          <ReloadIcon className="mr-2 h-4 w-4 animate-spin transition" />
+          <Loader className="mr-2 h-4 w-4 animate-spin transition" />
         </Button>
       </ClerkLoading>
       <ClerkLoaded>

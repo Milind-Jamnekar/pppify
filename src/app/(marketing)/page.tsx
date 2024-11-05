@@ -1,8 +1,17 @@
+// UI
 import { Button } from "@/components/ui/button";
-import { SignUpButton } from "@clerk/nextjs";
-import { ArrowRightCircle } from "lucide-react";
-import Link from "next/link";
+import BrandLogo from "./_components/brand-logo";
 import { ClerkIcon, NeonIcon } from "./_components/icons";
+import FooterGroup from "./_components/footer-group";
+import PricingCard from "./_components/pricing-card";
+
+// constants
+import { subscriptionTiersInOrder } from "../../../data/subscriptionTiers";
+
+// Lib
+import { ClerkLoaded, ClerkLoading, SignUpButton } from "@clerk/nextjs";
+import { ArrowRightCircle, Loader } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -16,12 +25,20 @@ export default function Home() {
           Optimize your product pricing across countries to maximize sales.
           Capture 85% of the untapped market with location-based dynamic pricing
         </p>
-        <SignUpButton>
-          <Button size="lg" className="text-lg ">
-            Get started for free
-            <ArrowRightCircle />
+        <ClerkLoading>
+          <Button size="lg" className="text-lg" disabled>
+            Please Wait
+            <Loader className="mr-2 h-4 w-4 animate-spin transition" />
           </Button>
-        </SignUpButton>
+        </ClerkLoading>
+        <ClerkLoaded>
+          <SignUpButton>
+            <Button size="lg" className="text-lg ">
+              Get started for free
+              <ArrowRightCircle />
+            </Button>
+          </SignUpButton>
+        </ClerkLoaded>
       </section>
 
       {/* Brand section  */}
@@ -53,6 +70,89 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Priciing section  */}
+      <section id="pricing" className=" px-8 py-16 bg-accent/5">
+        <h2 className="text-4xl text-center text-balance font-semibold mb-8">
+          Pricing software which pays for itself 20x over
+        </h2>
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 max-w-screen-xl mx-auto">
+          {subscriptionTiersInOrder.map((tier) => (
+            <PricingCard key={tier.name} {...tier} />
+          ))}
+        </div>
+      </section>
+
+      {/* Footer section  */}
+      <footer className="container pt-16 pb-8 flex flex-col sm:flex-row gap-8 sm:gap-4 justify-between items-start">
+        <Link href="/">
+          <BrandLogo />
+        </Link>
+        <div className="flex flex-col sm:flex-row gap-8">
+          <div className="flex flex-col gap-8">
+            <FooterGroup
+              title="Help"
+              links={[
+                { label: "PPP Discounts", href: "#" },
+                { label: "Discount API", href: "#" },
+              ]}
+            />
+            <FooterGroup
+              title="Solutions"
+              links={[
+                { label: "Newsletter", href: "#" },
+                { label: "SaaS Business", href: "#" },
+                { label: "Online Courses", href: "#" },
+              ]}
+            />
+          </div>
+          <div className="flex flex-col gap-8">
+            <FooterGroup
+              title="Features"
+              links={[{ label: "PPP Discounts", href: "#" }]}
+            />
+            <FooterGroup
+              title="Tools"
+              links={[
+                { label: "Salary Converter", href: "#" },
+                { label: "Coupon Generator", href: "#" },
+                { label: "Stripe App", href: "#" },
+              ]}
+            />
+            <FooterGroup
+              title="Company"
+              links={[
+                { label: "Affiliate", href: "#" },
+                { label: "Twitter", href: "#" },
+                { label: "Terms of Service", href: "#" },
+              ]}
+            />
+          </div>
+          <div className="flex flex-col gap-8">
+            <FooterGroup
+              title="Integrations"
+              links={[
+                { label: "Lemon Squeezy", href: "#" },
+                { label: "Gumroad", href: "#" },
+                { label: "Stripe", href: "#" },
+                { label: "Chargebee", href: "#" },
+                { label: "Paddle", href: "#" },
+              ]}
+            />
+            <FooterGroup
+              title="Tutorials"
+              links={[
+                { label: "Any Website", href: "#" },
+                { label: "Lemon Squeezy", href: "#" },
+                { label: "Gumroad", href: "#" },
+                { label: "Stripe", href: "#" },
+                { label: "Chargebee", href: "#" },
+                { label: "Paddle", href: "#" },
+              ]}
+            />
+          </div>
+        </div>
+      </footer>
     </>
   );
 }
