@@ -6,7 +6,7 @@ import { ClerkIcon, NeonIcon } from "./_components/icons";
 import PricingCard from "./_components/pricing-card";
 
 // constant
-import { subscriptionTiersInOrder } from "../../../data/subscriptionTiers";
+import { subscriptionTiersInOrder } from "../../data/subscriptionTiers";
 
 // Lib
 import { cn } from "@/lib/utils";

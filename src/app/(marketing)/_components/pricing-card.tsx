@@ -10,7 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 // constants
-import { subscriptionTiersInOrder } from "../../../../data/subscriptionTiers";
+import { subscriptionTiersInOrder } from "../../../data/subscriptionTiers";
 
 // helpers
 import { formatCompactNumber } from "@/lib/formatter";
@@ -45,7 +45,7 @@ function PricingCard({
         </div>
       )}
       <CardHeader>
-        <div className="text-accent dark:text-orange-200 font-semibold mb-8">
+        <div className="text-accent dark:text-accent font-semibold mb-8">
           {name}
         </div>
         <CardTitle className="text-xl font-bold">
