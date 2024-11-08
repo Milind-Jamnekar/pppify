@@ -43,16 +43,16 @@ export function ProductDetailsForm({
   });
 
   async function onSubmit(values: z.infer<typeof productDetailsSchema>) {
-    // const action =
-    //   product == null ? createProduct : updateProduct.bind(null, product.id);
-    // const data = await action(values);
-    // if (data?.message) {
-    //   toast({
-    //     title: data.error ? "Error" : "Success",
-    //     description: data.message,
-    //     variant: data.error ? "destructive" : "default",
-    //   });
-    // }
+    const action =
+      product == null ? createProduct : updateProduct.bind(null, product.id);
+    const data = await action(values);
+    if (data?.message) {
+      toast({
+        title: data.error ? "Error" : "Success",
+        description: data.message,
+        variant: data.error ? "destructive" : "default",
+      });
+    }
   }
 
   return (

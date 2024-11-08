@@ -93,7 +93,7 @@ export default function Home() {
       </section>
 
       {/* Priciing section  */}
-      <section id="pricing" className="py-28 bg-accent/5">
+      <section id="pricing" className="py-32 bg-accent/5">
         <h2 className="text-4xl text-center text-balance font-semibold mb-8">
           Pricing software which pays for itself 20x over
         </h2>

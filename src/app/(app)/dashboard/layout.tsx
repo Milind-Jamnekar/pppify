@@ -3,9 +3,9 @@ import Navbar from "./_components/navbar";
 
 function DashboardPageLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="container">{children}</main>
+      <main className="container flex-1">{children}</main>
     </div>
   );
 }

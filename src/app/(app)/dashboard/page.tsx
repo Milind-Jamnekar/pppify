@@ -12,6 +12,7 @@ async function DashboardPage() {
   const products = await getProducts(userId, 5);
 
   if (products.length === 0) return <EmptyProductPage />;
+
   return (
     <>
       <h2 className="mb-6 text-3xl font-semibold flex justify-between">

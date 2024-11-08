@@ -39,7 +39,7 @@ function PageWithBackButton({
   children: ReactNode;
 }) {
   return (
-    <div className="grid grid-cols-[auto,1fr] gap-3">
+    <div className="grid grid-cols-[auto,1fr] gap-5 mt-10">
       <Button size="icon" variant="outline" className="rounded-full" asChild>
         <Link href={backButtonHref}>
           <div className="sr-only">Back</div>

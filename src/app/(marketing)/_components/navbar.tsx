@@ -1,7 +1,6 @@
 "use client";
 import NLink from "@/components/ui/NLink";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader } from "@/components/ui/card";
 import {
   Drawer,
   DrawerClose,
