@@ -3,10 +3,10 @@ import Navbar from "./_components/navbar";
 
 function DashboardPageLayout({ children }: { children: ReactNode }) {
   return (
-    <main className="bg-accent/5 min-h-screen pt-8">
+    <div className="min-h-screen">
       <Navbar />
-      {children}
-    </main>
+      <main className="container">{children}</main>
+    </div>
   );
 }
 

@@ -27,23 +27,19 @@ import BrandLogo from "./brand-logo";
 
 export default function Navbar() {
   return (
-    <header className="mt-6 container">
-      <nav>
-        <Card className="flex items-center gap-10 container font-semibold rounded-full backdrop-blur-xl bg-background/60">
-          <CardHeader className="flex items-center flex-row justify-between space-y-0 px-0 py-4 w-full">
-            <Link href="/" className="">
-              <BrandLogo />
-            </Link>
-            <MobileDrawer />
-            <div className="hidden md:flex gap-2 items-center ">
-              <NLink href="#">Features</NLink>
-              <NLink href="#">Pricing</NLink>
-              <NLink href="#">About</NLink>
-              <LoginOrLogoutButton />
-              <ThemeChanger />
-            </div>
-          </CardHeader>
-        </Card>
+    <header className="container mt-8">
+      <nav className="flex items-center justify-between font-semibold rounded-full backdrop-blur-xl bg-background/60 p-5 border border-secondary">
+        <Link href="/" className="">
+          <BrandLogo />
+        </Link>
+        <MobileDrawer />
+        <div className="hidden md:flex gap-2 items-center">
+          <NLink href="#">Features</NLink>
+          <NLink href="#">Pricing</NLink>
+          <NLink href="#">About</NLink>
+          <LoginOrLogoutButton />
+          <ThemeChanger />
+        </div>
       </nav>
     </header>
   );
