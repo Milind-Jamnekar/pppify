@@ -16,9 +16,9 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { createProduct, updateProduct } from "@/server/actions/products";
-import { useToast } from "@/hooks/use-toast";
-import { AsteriskIcon } from "lucide-react";
 import { productDetailsSchema } from "@/schema/products";
+import { AsteriskIcon } from "lucide-react";
+import { toast } from "sonner";
 
 export function ProductDetailsForm({
   product,
@@ -30,7 +30,6 @@ export function ProductDetailsForm({
     url: string;
   };
 }) {
-  const { toast } = useToast();
   const form = useForm<z.infer<typeof productDetailsSchema>>({
     resolver: zodResolver(productDetailsSchema),
     defaultValues: product
@@ -46,12 +45,17 @@ export function ProductDetailsForm({
     const action =
       product == null ? createProduct : updateProduct.bind(null, product.id);
     const data = await action(values);
+
     if (data?.message) {
-      toast({
-        title: data.error ? "Error" : "Success",
-        description: data.message,
-        variant: data.error ? "destructive" : "default",
-      });
+      if (data.error) {
+        toast.error("Error in creating product", {
+          description: data.message,
+        });
+      } else {
+        toast.success("Success", {
+          description: data.message,
+        });
+      }
     }
   }
 
@@ -117,11 +121,19 @@ export function ProductDetailsForm({
           )}
         />
         <div className="self-end">
-          <Button disabled={form.formState.isSubmitting} type="submit">
+          <Button
+            isloading={form.formState.isSubmitting}
+            disabled={form.formState.isSubmitting}
+            type="submit"
+          >
             Save
           </Button>
         </div>
       </form>
     </Form>
   );
+}
+
+{
+  /* <AsteriskIcon className="text-destructive inline size-3 align-top" /> */
 }

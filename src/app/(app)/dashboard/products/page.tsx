@@ -4,6 +4,7 @@ import { auth } from "@clerk/nextjs/server";
 import { PlusIcon } from "lucide-react";
 import Link from "next/link";
 import EmptyProductPage from "../_components/empty-product-page";
+import { ProductGrid } from "../_components/product-grid";
 
 export default async function ProductsPage() {
   const { userId, redirectToSignIn } = await auth();
@@ -23,7 +24,7 @@ export default async function ProductsPage() {
           </Link>
         </Button>
       </h1>
-      {/* <ProductGrid products={products} /> */}
+      <ProductGrid products={products} />
     </>
   );
 }

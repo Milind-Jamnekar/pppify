@@ -21,7 +21,7 @@ function EmptyProductPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Button size="lg" asChild>
+          <Button size="lg">
             <Link href="/dashboard/products/new">Add Product</Link>
           </Button>
         </CardContent>
