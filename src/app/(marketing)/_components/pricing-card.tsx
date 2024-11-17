@@ -35,8 +35,8 @@ function PricingCard({
   return (
     <Card
       className={cn(
-        "relative shadow-none rounded-3xl overflow-hidden",
-        isMostPopular ? "border-accent dark:border-white border-2" : ""
+        "relative shadow-none overflow-hidden ",
+        isMostPopular ? "border-accent border-2 " : ""
       )}
     >
       {isMostPopular && (

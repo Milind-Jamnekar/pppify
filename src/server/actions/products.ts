@@ -1,13 +1,18 @@
 "use server";
-import { productDetailsSchema } from "@/schema/products";
+import {
+  productCountryDiscountsSchema,
+  productDetailsSchema,
+} from "@/schema/products";
 import { auth } from "@clerk/nextjs/server";
 import { z } from "zod";
 import {
   createProduct as createProductDB,
   updateProduct as updateProductDB,
   deleteProduct as deleteProductDB,
+  updateCountryDiscounts as updateCountryDiscountsDb,
 } from "@/server/db/products";
 import { redirect } from "next/navigation";
+import { dbCache } from "@/lib/cache";
 
 export async function createProduct(
   unsafeData: z.infer<typeof productDetailsSchema>
@@ -60,3 +65,50 @@ export async function deleteProduct(id: string) {
       : "There was an error updating your product",
   };
 }
+
+export async function updateCountryDiscounts(
+  id: string,
+  unsafeData: z.infer<typeof productCountryDiscountsSchema>
+) {
+  const { userId } = await auth();
+  const { success, data } = productCountryDiscountsSchema.safeParse(unsafeData);
+
+  if (!success || userId == null) {
+    return {
+      error: true,
+      message: "There was an error saving your country discounts",
+    };
+  }
+
+  const insert: {
+    countryGroupId: string;
+    productId: string;
+    coupon: string;
+    discountPercentage: number;
+  }[] = [];
+  const deleteIds: { countryGroupId: string }[] = [];
+
+  data.groups.forEach((group) => {
+    if (
+      group.coupon != null &&
+      group.coupon.length > 0 &&
+      group.discountPercentage != null &&
+      group.discountPercentage > 0
+    ) {
+      insert.push({
+        countryGroupId: group.countryGroupId,
+        coupon: group.coupon,
+        discountPercentage: group.discountPercentage / 100,
+        productId: id,
+      });
+    } else {
+      deleteIds.push({ countryGroupId: group.countryGroupId });
+    }
+  });
+
+  await updateCountryDiscountsDb(deleteIds, insert, id, userId);
+
+  return { error: false, message: "Country discounts saved" };
+}
+
+export async function updateProductCustomization(params: type) {}

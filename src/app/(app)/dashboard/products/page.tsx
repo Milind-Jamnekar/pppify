@@ -2,9 +2,9 @@ import { Button } from "@/components/ui/button";
 import { getProducts } from "@/server/db/products";
 import { auth } from "@clerk/nextjs/server";
 import { PlusIcon } from "lucide-react";
-import Link from "next/link";
 import EmptyProductPage from "../_components/empty-product-page";
 import { ProductGrid } from "../_components/product-grid";
+import { Link } from "next-view-transitions";
 
 export default async function ProductsPage() {
   const { userId, redirectToSignIn } = await auth();

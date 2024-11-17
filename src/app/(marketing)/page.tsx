@@ -1,66 +1,21 @@
 // UI
-import { Button, buttonVariants } from "@/components/ui/button";
 import BrandLogo from "./_components/brand-logo";
 import FooterGroup from "./_components/footer-group";
 import { ClerkIcon, NeonIcon } from "./_components/icons";
 import PricingCard from "./_components/pricing-card";
+import { Hero } from "./_components/hero";
 
 // constant
 import { subscriptionTiersInOrder } from "../../data/subscriptionTiers";
 
 // Lib
-import { cn } from "@/lib/utils";
-import {
-  ClerkLoaded,
-  ClerkLoading,
-  SignedIn,
-  SignedOut,
-  SignUpButton,
-} from "@clerk/nextjs";
-import { ArrowRightCircle, Loader } from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
   return (
     <>
       {/* Hero section  */}
-      <section className="min-h-[calc(100vh-70px)] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops)_60%)] dark:from-red-900 from-red-100 dark:via-yellow-950 via-yellow-100 to-bg-primary flex items-center justify-center text-center text-balance flex-col gap-8 px-4">
-        <h1 className="text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight m-4">
-          Price smarter, Sell bigger!
-        </h1>
-        <p className="texy-lg lg:text-3xl text-muted-foreground dark:text-gray-300 max-w-screen-xl">
-          Optimize your product pricing across countries to maximize sales.
-          Capture 85% of the untapped market with location-based dynamic pricing
-        </p>
-        <ClerkLoading>
-          <Button size="lg" className="text-lg" disabled>
-            Please Wait
-            <Loader className="mr-2 h-4 w-4 animate-spin transition" />
-          </Button>
-        </ClerkLoading>
-        <ClerkLoaded>
-          <SignedOut>
-            <SignUpButton>
-              <Button size="lg" className="text-lg ">
-                Get started for free
-                <ArrowRightCircle />
-              </Button>
-            </SignUpButton>
-          </SignedOut>
-
-          <SignedIn>
-            <Link
-              className={cn(buttonVariants({ size: "lg" }), "text-lg")}
-              href="/dashboard"
-            >
-              Dashboard
-            </Link>
-            <p className="text-muted-foreground">
-              You are already logged in 🎉, go to the dashboard
-            </p>
-          </SignedIn>
-        </ClerkLoaded>
-      </section>
+      <Hero />
 
       {/* Brand section  */}
       <section className="bg-primary text-primary-foreground">
@@ -94,13 +49,15 @@ export default function Home() {
 
       {/* Priciing section  */}
       <section id="pricing" className="py-32 bg-accent/5">
-        <h2 className="text-4xl text-center text-balance font-semibold mb-8">
-          Pricing software which pays for itself 20x over
-        </h2>
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 max-w-screen-xl mx-auto">
-          {subscriptionTiersInOrder.map((tier) => (
-            <PricingCard key={tier.name} {...tier} />
-          ))}
+        <div className="container">
+          <h2 className="text-4xl text-center text-balance font-semibold mb-8">
+            Pricing software which pays for itself 20x over
+          </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-5 max-w-screen-xl mx-auto ">
+            {subscriptionTiersInOrder.map((tier) => (
+              <PricingCard key={tier.name} {...tier} />
+            ))}
+          </div>
         </div>
       </section>
 

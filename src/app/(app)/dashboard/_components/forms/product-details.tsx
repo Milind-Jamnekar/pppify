@@ -48,13 +48,21 @@ export function ProductDetailsForm({
 
     if (data?.message) {
       if (data.error) {
-        toast.error("Error in creating product", {
-          description: data.message,
-        });
+        toast.error(
+          product ? "Error in updating product" : "Error in creating product",
+          {
+            description: data.message,
+          }
+        );
       } else {
-        toast.success("Success", {
-          description: data.message,
-        });
+        toast.success(
+          product
+            ? "Successfully updated product details"
+            : "Successfully created product",
+          {
+            description: data.message,
+          }
+        );
       }
     }
   }

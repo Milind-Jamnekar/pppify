@@ -27,7 +27,7 @@ import BrandLogo from "./brand-logo";
 export default function Navbar() {
   return (
     <header className="container mt-8">
-      <nav className="flex items-center justify-between font-semibold rounded-full backdrop-blur-xl bg-background/60 p-5 border border-secondary">
+      <nav className="flex items-center justify-between font-semibold rounded-3xl p-5 border border-secondary">
         <Link href="/" className="">
           <BrandLogo />
         </Link>

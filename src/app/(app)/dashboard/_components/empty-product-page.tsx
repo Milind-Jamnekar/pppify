@@ -10,7 +10,7 @@ import Link from "next/link";
 
 function EmptyProductPage() {
   return (
-    <div className="max-w-xl mx-auto mt-32 md:mt-40">
+    <div className="max-w-xl mx-auto">
       <Card className=" text-center text-balance">
         <CardHeader>
           <CardTitle className="text-4xl font-semibold mb-2">

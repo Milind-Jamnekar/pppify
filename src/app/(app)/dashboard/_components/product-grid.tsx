@@ -6,8 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { DotsHorizontalIcon } from "@radix-ui/react-icons";
-import Link from "next/link";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,11 +14,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 // import { AddToSiteProductModalContent } from "./AddToSiteProductModalContent";
 import { AlertDialog, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { AddToSiteProductModalContent } from "./add-to-site-modal-content";
 import DeleteProductAlertDialogContent from "./delete-product-dialog-content";
+import { Link } from "next-view-transitions";
 // import { DeleteProductAlertDialogContent } from "./DeleteProductAlertDialogContent";
 
 export function ProductGrid({
@@ -70,7 +70,9 @@ export function ProductCard({
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuItem asChild>
-                    <Link href={`/dashboard/products/${id}/edit`}>Edit</Link>
+                    <Link href={`/dashboard/products/${id}/edit?tab=details`}>
+                      Edit
+                    </Link>
                   </DropdownMenuItem>
                   <DialogTrigger asChild>
                     <DropdownMenuItem>Add To Site</DropdownMenuItem>

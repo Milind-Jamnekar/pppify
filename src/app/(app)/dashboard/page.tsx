@@ -15,7 +15,7 @@ async function DashboardPage() {
   if (products.length === 0) return <EmptyProductPage />;
 
   return (
-    <>
+    <section className="border p-5 rounded-md overflow-hidden">
       <h2 className="mb-6 text-3xl font-semibold flex justify-between">
         <Link
           className="group flex gap-2 items-center hover:underline"
@@ -44,7 +44,7 @@ async function DashboardPage() {
       {/* <HasPermission permission={canAccessAnalytics} renderFallback>
         <AnalyticsChart userId={userId} />
       </HasPermission> */}
-    </>
+    </section>
   );
 }
 

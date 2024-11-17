@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "sonner";
+import { ViewTransitions } from "next-view-transitions";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,22 +28,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
+    <ViewTransitions>
+      <ClerkProvider>
+        <html lang="en" suppressHydrationWarning>
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
           >
-            {children}
-          </ThemeProvider>
-          <Toaster richColors />
-        </body>
-      </html>
-    </ClerkProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {children}
+            </ThemeProvider>
+            <Toaster richColors />
+          </body>
+        </html>
+      </ClerkProvider>
+    </ViewTransitions>
   );
 }

@@ -10,7 +10,7 @@ function Navbar() {
   return (
     <header className="container my-8">
       <nav>
-        <Card className="flex items-center gap-10 container font-semibold rounded-full backdrop-blur-xl bg-background/60">
+        <Card className="flex items-center gap-10 container font-semibold rounded-full backdrop-blur-xl bg-background">
           <CardHeader className="flex items-center flex-row justify-between space-y-0 px-0 py-4 w-full">
             <Link href="/dashboard" className="">
               <BrandLogo />
