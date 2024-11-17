@@ -1,23 +1,23 @@
 import {
-  getProduct,
-  getProductCountryGroups,
-  getProductCustomization,
-} from "@/server/db/products";
-import { auth } from "@clerk/nextjs/server";
-import { notFound } from "next/navigation";
-import PageWithBackButton from "../../../_components/page-with-back-button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ProductDetailsForm } from "../../../_components/forms/product-details";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  getProduct,
+  getProductCountryGroups,
+  getProductCustomization,
+} from "@/server/db/products";
+import { canRemoveBranding } from "@/server/permission";
+import { auth } from "@clerk/nextjs/server";
+import { notFound } from "next/navigation";
 import { CountryDiscountsForm } from "../../../_components/forms/country-discount";
-import { canCustomizeBanner, canRemoveBranding } from "@/server/permission";
 import CustomizationForm from "../../../_components/forms/customization";
+import { ProductDetailsForm } from "../../../_components/forms/product-details";
+import PageWithBackButton from "../../../_components/page-with-back-button";
 
 async function ProductEditPage({
   params,
