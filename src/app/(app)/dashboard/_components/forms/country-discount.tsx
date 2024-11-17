@@ -154,7 +154,11 @@ export function CountryDiscountsForm({
         ))}
 
         <div className="self-end">
-          <Button disabled={form.formState.isSubmitting} type="submit">
+          <Button
+            isloading={form.formState.isSubmitting}
+            disabled={form.formState.isSubmitting}
+            type="submit"
+          >
             Save
           </Button>
         </div>

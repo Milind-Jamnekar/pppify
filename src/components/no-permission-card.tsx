@@ -11,14 +11,14 @@ import {
 import { ReactNode } from "react";
 
 export function NoPermissionCard({
-  children = "You do not have permission to perform this action. Try upgrading your account to access this feature.",
+  children = "This features are available for standard and premium only. Try upgrading your account to access this feature.",
 }: {
   children?: ReactNode;
 }) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-xl">Permission Denied</CardTitle>
+        <CardTitle className="text-xl">Premium Features</CardTitle>
       </CardHeader>
       <CardContent>
         <CardDescription>{children}</CardDescription>

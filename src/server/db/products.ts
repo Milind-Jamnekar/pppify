@@ -234,3 +234,23 @@ async function getProductCustomizationInternal(
 
   return data?.productCustomization;
 }
+
+export async function updateProductCustomization(
+  customization: Partial<typeof ProductCustomizationTable.$inferInsert>,
+  productId: string,
+  userId: string
+) {
+  const product = await getProduct(userId, productId);
+  if (!product) throw new Error("product is not available is product table");
+
+  await db
+    .update(ProductCustomizationTable)
+    .set(customization)
+    .where(eq(ProductCustomizationTable.productId, productId));
+
+  revalidateDbCache({
+    tag: CACHE_TAGS.products,
+    userId,
+    id: productId,
+  });
+}

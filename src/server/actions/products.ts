@@ -1,6 +1,7 @@
 "use server";
 import {
   productCountryDiscountsSchema,
+  productCustomizationSchema,
   productDetailsSchema,
 } from "@/schema/products";
 import { auth } from "@clerk/nextjs/server";
@@ -10,9 +11,9 @@ import {
   updateProduct as updateProductDB,
   deleteProduct as deleteProductDB,
   updateCountryDiscounts as updateCountryDiscountsDb,
+  updateProductCustomization as updateProductCustomizationDb,
 } from "@/server/db/products";
 import { redirect } from "next/navigation";
-import { dbCache } from "@/lib/cache";
 
 export async function createProduct(
   unsafeData: z.infer<typeof productDetailsSchema>
@@ -111,4 +112,27 @@ export async function updateCountryDiscounts(
   return { error: false, message: "Country discounts saved" };
 }
 
-export async function updateProductCustomization(params: type) {}
+export async function updateProductCustomization(
+  unsafeData: z.infer<typeof productCustomizationSchema>,
+  productId: string
+) {
+  const { userId } = await auth();
+  const { success, data } = productCustomizationSchema.safeParse(unsafeData);
+
+  if (!success || userId == null) {
+    return {
+      error: true,
+      message: "There was an error updating product customization",
+    };
+  }
+
+  try {
+    await updateProductCustomizationDb(data, productId, userId);
+    return { error: false, message: "Customization updated successfully" };
+  } catch (error: any) {
+    return {
+      error: true,
+      message: "Error in updating product in db" + error.message,
+    };
+  }
+}

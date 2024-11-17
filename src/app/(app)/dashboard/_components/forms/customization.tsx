@@ -1,6 +1,7 @@
 "use client";
 import { Banner } from "@/components/banner";
 import { NoPermissionCard } from "@/components/no-permission-card";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -22,10 +23,13 @@ import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { ProductCustomizationTable } from "@/drizzle/schema";
+import { cn } from "@/lib/utils";
 import { productCustomizationSchema } from "@/schema/products";
+import { updateProductCustomization } from "@/server/actions/products";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AsteriskIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 export default function CustomizationForm({
@@ -45,8 +49,21 @@ export default function CustomizationForm({
     },
   });
 
-  const onSubmit = (values: z.infer<typeof productCustomizationSchema>) => {
-    console.log(values);
+  const onSubmit = async (
+    values: z.infer<typeof productCustomizationSchema>
+  ) => {
+    const data = await updateProductCustomization(
+      values,
+      customization.productId
+    );
+
+    if (data.message) {
+      if (data.error) {
+        toast.error(data.message);
+      } else {
+        toast.success(data.message);
+      }
+    }
   };
 
   const formValues = form.watch();
@@ -75,7 +92,16 @@ export default function CustomizationForm({
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex gap-6 flex-col mt-8"
         >
-          <Card>
+          <Card
+            className={cn([
+              !canCustomizeBanner && "relative border-accent border-2",
+            ])}
+          >
+            {!canCustomizeBanner && (
+              <div className="absolute -top-3 right-6">
+                <Badge className="bg-accent px-4">Pro</Badge>
+              </div>
+            )}
             <CardHeader>
               <CardTitle>Customization</CardTitle>
               <CardDescription>
@@ -215,8 +241,12 @@ export default function CustomizationForm({
                 </div>
               </div>
               {canCustomizeBanner && (
-                <div className="self-end">
-                  <Button disabled={form.formState.isSubmitting} type="submit">
+                <div className="w-full">
+                  <Button
+                    isloading={form.formState.isSubmitting}
+                    disabled={form.formState.isSubmitting}
+                    type="submit"
+                  >
                     Save
                   </Button>
                 </div>

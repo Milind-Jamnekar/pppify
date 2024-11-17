@@ -138,7 +138,8 @@ async function CustomizationTab({
       <CardContent>
         <CustomizationForm
           canRemoveBranding={await canRemoveBranding(userId)}
-          canCustomizeBanner={await canCustomizeBanner(userId)}
+          // canCustomizeBanner={await canCustomizeBanner(userId)}
+          canCustomizeBanner={true}
           customization={customization}
         />
       </CardContent>
